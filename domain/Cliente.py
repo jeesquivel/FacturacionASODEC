@@ -11,13 +11,16 @@ class Cliente:
     numeroCedula =0
     nombreCompleto =""
     telefono = 0
+    esEstudiante = False
+    credito = 0
 
     #constructor de la clase
-    def __init__(self, numCedula, nbrCliente, telefono):
+    def __init__(self, numCedula, nbrCliente, telefono, esEstudiante, credito):
         self.nombreCompleto = nbrCliente
         self.numeroCedula = numCedula
         self.telefono = telefono
-
+        self.esEstudiante = esEstudiante
+        self.credito = credito
 
     # obtiene el nombre del cliente : string
     def getNombre(self):
