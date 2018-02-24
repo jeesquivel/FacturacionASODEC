@@ -25,13 +25,11 @@ class Factura:
     def getNumeroFactura(self):
         return self.numeroFactura
 
-
-
     # obtiene los detalles del cliente
     def getDatosCliente(self):
         return self.cliente.toString()
 
-    # signa producto a la factura
+    # asigna producto a la factura
     def setPorductoFactura(self, producto, cantidad):
         self.productos.append([producto, cantidad])
 
