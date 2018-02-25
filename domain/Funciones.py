@@ -53,3 +53,18 @@ def calcularTotalFactura(factura):
     for i in productosFactura:
         total+=i.getPrecio
     factura.setTotalFactura(total)
+
+
+def descontarCantidad(codigo,inventario,cantidad):
+    for i in inventario:
+        if i.getCodigo==codigo:
+            i.setCantidad(i.getCantidad-cantidad)
+
+
+
+def actualizarInventario(factura,inventario):
+    listaProductosFactura=factura.getProductos()
+    for i in listaProductosFactura:
+        producto=i[0]
+        descontarCantidad(producto.getCodigo,inventario,i[1])
+

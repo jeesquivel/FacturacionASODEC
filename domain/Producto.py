@@ -25,3 +25,5 @@ class Producto:
     def getCantidad(self):
         return self.cantidad
 
+    def setCantidad(self,cantidad):
+        self.cantidad=cantidad
