@@ -15,6 +15,7 @@ class Factura:
     numeroFactura = 0
     cliente= Cliente
     productos = []
+    total=0
 
     # constructor de la clase
     def __init__(self, pNumfactura, cliente):
@@ -30,15 +31,21 @@ class Factura:
         return self.cliente.toString()
 
     # asigna producto a la factura
-    def setPorductoFactura(self, producto, cantidad):
+    def setProductoFactura(self, producto, cantidad):
         self.productos.append([producto, cantidad])
+
+    def getProductos(self):
+        return self.productos
 
     # obtiene los detalles de la factura (lineas facturas)
     def getDetalleFactura(self):
-        string ="CODIGO        NOMBRE PRODUCTO    PRECIO UNITARIO      CANTIDAD\n"
+        string ="CODIGO \t\t  NOMBRE PRODUCTO \t\t\tPRECIO UNITARIO      CANTIDAD\n"
         listaProductos=self.productos
         for i in listaProductos:
             producto =i[0]
             string+=    str(producto.getCodigo()) +"             " + \
-                        producto.getNombre() +"     "+ str(producto.getPrecio()) +"                 "+str(i[1])+"\n"
+                        producto.getNombre() +"\t\t\t"+ str(producto.getPrecio()) +"\t\t\t"+str(i[1])+"\n"
         return string
+
+    def setTotalFactura(self,total):
+        self.total=total

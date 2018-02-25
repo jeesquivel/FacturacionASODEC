@@ -1,3 +1,5 @@
+
+
 class Producto:
     codigo = ""
     nombre = ""
@@ -19,4 +21,7 @@ class Producto:
 
     def getPrecio(self):
         return self.precio
+
+    def getCantidad(self):
+        return self.cantidad
 

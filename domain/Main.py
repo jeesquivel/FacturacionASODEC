@@ -3,31 +3,27 @@ from domain.Factura import Factura
 from domain.Producto import Producto
 from domain.Funciones import *
 
-#BASE DE DATOS FALSA
-inventario = inicializarBDFalsa_inv()
+#BASE DE DATOS FALSA varibles globales
+global inventario
+inventario=inicializarBDFalsa_inv()
+global clientes
 clientes = inicializarBDFalsa_cl()
+
+# variable global
+global facturas
+facturas=[]
 
 
 factura = crearCabecera()
 print(factura)
 
 
+import time
 
-'''cliente = Cliente(1, "Jeison Esquivel", 1)
+print( time.strftime("%a, %d %b %Y %I:%M:%S", time.localtime(10.5)))
 
-producto1=Producto(1,"sardina del mar",555)
-producto2=Producto(2,"condones durex",1800)
-producto3=Producto(3,"Chocolates Milan",700)
-
-factura1 = Factura(1, cliente)
-factura1.setPorductoFactura(producto1, 1)
-factura1.setPorductoFactura(producto2,2)
-factura1.setPorductoFactura(producto2,1)
-factura1.setPorductoFactura(producto3,1)
-
-print("\n")
+print(imprimirInventario(inventario))
 
 
-print (factura1.getDetalleFactura())'''
 
 
