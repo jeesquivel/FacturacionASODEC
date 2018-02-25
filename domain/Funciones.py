@@ -20,7 +20,7 @@ def inicializarBDFalsa_cl():
     clientes = []
 
     clientes += [Cliente(1, 'Rosa', True, 0)]
-    clientes += [Cliente(2, 'Potter', True, 5000)]
+    clientes += [Cliente(2, 'Potter', True, -1000)]
     clientes += [Cliente(3, 'Jeison', False, 0)]
 
     return clientes
@@ -49,10 +49,11 @@ def crearCabecera():
 #calcula el total a pagar de una factura
 
 def calcularTotalFactura(factura):
-    total=0
-    productosFactura=factura.getProductos()
+    total = 0
+    productosFactura = factura.productos
     for i in productosFactura:
-        total+=i.getPrecio
+        producto = i[0]
+        total += producto.getPrecio()
     factura.setTotalFactura(total)
 
 def crearDetalle(factura, inventario):
@@ -78,6 +79,42 @@ def crearDetalle(factura, inventario):
             print(imprimirInventario(inventario))
 
     return factura
+
+def iniciarPago(clientes, factura, descuento):
+    idCliente = int(input("Ingrese el ID del cliente, si este no posee ID digite -1."))
+
+    if (idCliente != -1 and esEstudiante(clientes, idCliente)):
+        factura.descuento = -1 * factura.total * descuento
+        factura.total = factura.total * (1 - descuento)
+
+        esCredito = input("¿El estudiante pagara a credito (s/n)?")
+        if esCredito == "s":
+            actualizarCreditoEstudiante(clientes, idCliente, factura.total)
+            factura.metodoPago = "Credito"
+            return
+
+    metodoPago = input("Ingrese el metodo de pago: (Efectivo | Tarjeta [E|T])")
+    if metodoPago == "E":
+        factura.efectivo = int(input("Ingrese el monto de efectivo dado por el cliente."))
+        factura.cambio = factura.efectivo - factura.total
+        factura.metodoPago = "Efectivo"
+        return
+    else:
+        print("Inserte la tarjeta...")
+        print("*SE UTILIZA UN ALGUN SISTEMA DE PAGO CON TARJETA CON EL HW CORRESPONDIENTE*")
+        factura.metodoPago = "Tarjeta"
+        return
+
+def actualizarCreditoEstudiante(clientes, id, monto):
+    for cliente in clientes:
+        if cliente.numeroCedula == id:
+            cliente.credito -= monto
+
+def esEstudiante(clientes, id):
+    for cliente in clientes:
+        if cliente.numeroCedula == id:
+            return True
+    return False
 
 def enIventario(inventario, id):
     for producto in inventario:

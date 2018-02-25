@@ -15,7 +15,11 @@ class Factura:
     numeroFactura = 0
     cabecera = ""
     productos = []
-    total=0
+    total = 0
+    descuento = 0
+    metodoPago = ""
+    efectivo = 0
+    cambio = 0
 
     # constructor de la clase
     def __init__(self, pNumfactura):
