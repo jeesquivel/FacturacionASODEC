@@ -1,10 +1,17 @@
-from domain.Cliente import Cliente
-from domain.Factura import Factura
-from domain.Producto import Producto
+#Instituto Tecnologico de Costa Rica
+#Escuela de Ing. en Computacion
+
+#Tarea 2 - Requerimientos de Software
+#Autores:   * Jeison Esquivel Samudio (2013018688)
+#           * David Valverde Garro (2016034774)
+
+#SISTEMA FACTURA ASODEC
+
 from domain.Funciones import *
 
 #Datos
-factura = Factura(0)
+idFactura = 0
+factura = Factura(idFactura)
 
 #BASE DE DATOS FALSA
 inventario = inicializarBDFalsa_inv()
@@ -21,25 +28,17 @@ global facturas
 facturas=[]
 
 
-factura.cabecera = crearCabecera()
-factura = crearDetalle(factura, inventario)
-calcularTotalFactura(factura)
-iniciarPago(clientes, factura, descuento)
+while True:
+    factura.cabecera = crearCabecera()
+    factura = crearDetalle(factura, inventario)
+    calcularTotalFactura(factura)
+    iniciarPago(clientes, factura, descuento)
+    actualizarInventario(factura, inventario)
+    print(factura.cabecera)
+    print(factura.getDetalleFactura())
 
-print("Total:")
-print(factura.total)
-
-print(factura.cabecera)
-print(factura.getDetalleFactura())
-
-'''import time
-
-print( time.strftime("%a, %d %b %Y %I:%M:%S", time.localtime(10.5)))
-
-print(imprimirInventario(inventario))'''
-
-
-
-
-
-
+    continuar = input("¿Desea crear otra factura (s/n)?\n")
+    if continuar == "n":
+        break
+    idFactura += 1
+    factura = Factura(idFactura)

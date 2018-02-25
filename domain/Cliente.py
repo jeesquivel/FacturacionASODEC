@@ -1,12 +1,3 @@
-'''
-Clase: Cliente
-
-atributos:
-    numero de cedula    int
-    nombre completo     string
-    telefono            int
-'''
-
 class Cliente:
     numeroCedula =0
     nombreCompleto =""

@@ -1,5 +1,3 @@
-
-
 class Producto:
     codigo = ""
     nombre = ""
@@ -26,4 +24,4 @@ class Producto:
         return self.cantidad
 
     def setCantidad(self,cantidad):
-        self.cantidad=cantidad
+        self.cantidad -= cantidad

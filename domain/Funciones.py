@@ -4,7 +4,7 @@ from domain.Cliente import Cliente
 from domain.Factura import Factura
 from domain.Producto import Producto
 
-
+# Crea un inventario de productos en una lista
 def inicializarBDFalsa_inv():
     inventario = []
 
@@ -16,6 +16,7 @@ def inicializarBDFalsa_inv():
 
     return inventario
 
+# Crea una lista de clientes con sus respectivos datos
 def inicializarBDFalsa_cl():
     clientes = []
 
@@ -25,11 +26,12 @@ def inicializarBDFalsa_cl():
 
     return clientes
 
+# Arma un string con la tabla del inventario de productos
 def imprimirInventario(inventario):
     string1="===================================================================\n"
     string=string1+"CODIGO\t\tNOMBRE PRODUCTO \t\tPRECIO \t\tCANT DISPONIBLE\n"+string1
     for i in inventario:
-        string+=   "\t" +str(i.getCodigo())+"\t\t"+i.getNombre()+"\t\t\t"+str(i.getPrecio())+"\t\t\t\t"+str(i.getCantidad())+"\n"
+        string +=   "\t" +str(i.getCodigo())+"\t\t"+i.getNombre()+"\t\t\t"+str(i.getPrecio())+"\t\t\t\t"+str(i.getCantidad())+"\n"
 
     return string+string1
 
@@ -57,6 +59,7 @@ def calcularTotalFactura(factura):
         total += producto.getPrecio()*i[1]
     factura.setTotalFactura(total)
 
+# Crea las lineas de la factura con los productos y sus cantidades
 def crearDetalle(factura, inventario):
     print(imprimirInventario(inventario))
 
@@ -81,22 +84,23 @@ def crearDetalle(factura, inventario):
 
     return factura
 
+# Solicita todos los datos necesarios para establecer el pago de los productos
 def iniciarPago(clientes, factura, descuento):
-    idCliente = int(input("Ingrese el ID del cliente, si este no posee ID digite -1."))
+    idCliente = int(input("Ingrese el ID del cliente, si este no posee ID digite -1:\n"))
 
     if (idCliente != -1 and esEstudiante(clientes, idCliente)):
         factura.descuento = -1 * factura.total * descuento
         factura.total = factura.total * (1 - descuento)
 
-        esCredito = input("¿El estudiante pagara a credito (s/n)?")
+        esCredito = input("¿El estudiante pagara a credito (s/n):\n")
         if esCredito == "s":
             actualizarCreditoEstudiante(clientes, idCliente, factura.total)
             factura.metodoPago = "Credito"
             return
 
-    metodoPago = input("Ingrese el metodo de pago: (Efectivo | Tarjeta [E|T])")
+    metodoPago = input("Ingrese el metodo de pago: (Efectivo | Tarjeta [E|T]):\n")
     if metodoPago == "E":
-        factura.efectivo = int(input("Ingrese el monto de efectivo dado por el cliente."))
+        factura.efectivo = int(input("Ingrese el monto de efectivo dado por el cliente:\n"))
         factura.cambio = factura.efectivo - factura.total
         factura.metodoPago = "Efectivo"
         return
@@ -106,41 +110,39 @@ def iniciarPago(clientes, factura, descuento):
         factura.metodoPago = "Tarjeta"
         return
 
+# Actualiza la informacion de credito para el estudiante con el ID dado
 def actualizarCreditoEstudiante(clientes, id, monto):
     for cliente in clientes:
         if cliente.numeroCedula == id:
             cliente.credito -= monto
 
+# Determina si un cliente con el ID dado es un estudiante
 def esEstudiante(clientes, id):
     for cliente in clientes:
-        if cliente.numeroCedula == id:
+        if (cliente.numeroCedula == id and cliente.esEstudiante):
             return True
     return False
 
+# Determina si un producto con un ID dado esta en el inventario
 def enIventario(inventario, id):
     for producto in inventario:
         if producto.codigo == id:
             return True
     return False
 
+# Determina si la cantidad solicitada de un producto se encuentra disponible
 def cantidadDisponible(inventario, id, ctd):
     for producto in inventario:
         if(producto.codigo == id and producto.cantidad >= ctd):
             return True
     return False
 
+# Retorna el producto con el ID dado
 def retornarProducto(inventario, id):
     for producto in inventario:
         if producto.codigo == id:
             return producto
     return
-
-def descontarCantidad(codigo,inventario,cantidad):
-    for i in inventario:
-        if i.getCodigo==codigo:
-            i.setCantidad(i.getCantidad-cantidad)
-
-
 
 def actualizarInventario(factura,inventario):
     listaProductosFactura=factura.getProductos()
@@ -148,3 +150,7 @@ def actualizarInventario(factura,inventario):
         producto=i[0]
         descontarCantidad(producto.getCodigo,inventario,i[1])
 
+def descontarCantidad(codigo,inventario,cantidad):
+    for i in inventario:
+        if i.getCodigo==codigo:
+            i.setCantidad(cantidad)

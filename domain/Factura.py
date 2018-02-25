@@ -1,16 +1,3 @@
-'''
-Clase: FACTURA
-
-ATRIBUTOS:
-    numero de factura   int
-    cliente             Cliente
-    productos           []
-
-'''
-
-from domain.Cliente import Cliente
-
-
 class Factura:
     numeroFactura = 0
     cabecera = ""
