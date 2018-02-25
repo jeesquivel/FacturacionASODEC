@@ -13,13 +13,12 @@ from domain.Cliente import Cliente
 
 class Factura:
     numeroFactura = 0
-    cliente= Cliente
+    cabecera = ""
     productos = []
     total=0
 
     # constructor de la clase
-    def __init__(self, pNumfactura, cliente):
-        self.cliente = cliente
+    def __init__(self, pNumfactura):
         self.numeroFactura = pNumfactura
 
     # obtiene el  numerod efactura de la clase
