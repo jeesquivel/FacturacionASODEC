@@ -47,6 +47,7 @@ def crearCabecera():
 
 
 #calcula el total a pagar de una factura
+
 def calcularTotalFactura(factura):
     total=0
     productosFactura=factura.getProductos()
