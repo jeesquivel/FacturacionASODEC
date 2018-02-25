@@ -42,12 +42,20 @@ class Factura:
 
     # obtiene los detalles de la factura (lineas facturas)
     def getDetalleFactura(self):
-        string ="CODIGO \t\t  NOMBRE PRODUCTO \t\t\tPRECIO UNITARIO      CANTIDAD\n"
+        string1="==========================================================================\n"
+        string =string1+"CODIGO \t\t  NOMBRE PRODUCTO \t\t\tPRECIO UNITARIO    CANTIDAD\n" +string1
         listaProductos=self.productos
         for i in listaProductos:
             producto =i[0]
             string+=    str(producto.getCodigo()) +"             " + \
-                        producto.getNombre() +"\t\t\t"+ str(producto.getPrecio()) +"\t\t\t"+str(i[1])+"\n"
+                        producto.getNombre() +"\t\t\t"+ str(producto.getPrecio()) +"\t\t\t\t\t"+str(i[1])+"\n"
+        string+=string1
+        string+="DETALLES  DEL PAGO\n"+string1
+        string+="METODO PAGO\t\t\t\t"+self.metodoPago +"\n"
+        string+="CONTADO\t\t\t\t\t"+str(self.total)+"\n"
+        string+="DESCUENTO\t\t\t\t" + str(self.descuento) + "\n"
+        string+="EFECTIVO\t\t\t\t"+str(self.efectivo)+"\n"
+        string+="VUELTO\t\t\t\t\t"+str(self.cambio)+"\n"
         return string
 
     def setTotalFactura(self,total):

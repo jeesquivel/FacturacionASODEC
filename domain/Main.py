@@ -32,7 +32,6 @@ print(factura.total)
 print(factura.cabecera)
 print(factura.getDetalleFactura())
 
-
 '''import time
 
 print( time.strftime("%a, %d %b %Y %I:%M:%S", time.localtime(10.5)))

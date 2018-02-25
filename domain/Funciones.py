@@ -35,14 +35,15 @@ def imprimirInventario(inventario):
 
 #crea la cabecera de la factura
 def crearCabecera():
-    cabecera = ""
+    cabecera = "=========================================================================\n"
+    spacios=5*"\t"
     fecha = datetime.now().strftime("Fecha: %d/%m/%Y Hora: %H:%M:%S")
-    cabecera += "         ASODEC - Ventas\n"
-    cabecera += "      Campus ITCR, Cartago\n"
-    cabecera += "         Telef.: 2550-2290\n"
-    cabecera += "---------------------------------\n"
-    cabecera += fecha + "\n"
-    cabecera += "---------------------------------\n"
+    cabecera +=spacios+ "         ASODEC - Ventas\n"
+    cabecera +=spacios+ "      Campus ITCR, Cartago\n"
+    cabecera +=spacios+ "         Telef.: 2550-2290\n"
+    cabecera +=spacios+ "---------------------------------\n"
+    cabecera +=spacios+ fecha + "\n"
+    cabecera += spacios+ "---------------------------------\n"
     return cabecera
 
 
@@ -53,7 +54,7 @@ def calcularTotalFactura(factura):
     productosFactura = factura.productos
     for i in productosFactura:
         producto = i[0]
-        total += producto.getPrecio()
+        total += producto.getPrecio()*i[1]
     factura.setTotalFactura(total)
 
 def crearDetalle(factura, inventario):
