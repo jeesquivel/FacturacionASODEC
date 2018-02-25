@@ -54,6 +54,47 @@ def calcularTotalFactura(factura):
         total+=i.getPrecio
     factura.setTotalFactura(total)
 
+def crearDetalle(factura, inventario):
+    print(imprimirInventario(inventario))
+
+    while(True):
+        idProd = int(input("Ingrese el código del producto:\n"))
+        if not enIventario(inventario, idProd):
+            print("Ese producto no se encuentra disponible.\n")
+            continue
+
+        ctdProd = int(input("Ingrese la cantidad del producto:\n"))
+        if not cantidadDisponible(inventario, idProd, ctdProd):
+            print("La cantidad solicitada de ese producto no esta disponible\n")
+            continue
+
+        factura.setProductoFactura(retornarProducto(inventario, idProd), ctdProd)
+
+        continuar = input("¿Desea seguir ingresando productos (s/n)? \n")
+        if continuar == "n":
+            break
+        else:
+            print(imprimirInventario(inventario))
+
+    return factura
+
+def enIventario(inventario, id):
+    for producto in inventario:
+        if producto.codigo == id:
+            return True
+    return False
+
+def cantidadDisponible(inventario, id, ctd):
+    for producto in inventario:
+        if(producto.codigo == id and producto.cantidad >= ctd):
+            return True
+    return False
+
+def retornarProducto(inventario, id):
+    for producto in inventario:
+        if producto.codigo == id:
+            return producto
+    return
 
 def descontarCantidad(codigo,inventario,cantidad):
     for i in inventario:
