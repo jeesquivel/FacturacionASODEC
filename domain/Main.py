@@ -4,6 +4,8 @@
 #Tarea 2 - Requerimientos de Software
 #Autores:   * Jeison Esquivel Samudio (2013018688)
 #           * David Valverde Garro (2016034774)
+# Comentarios: Adjunto esta una version mejorada del diagrama de actividad
+# que incorpora las ideas de los diagramas de ambos integrantes.
 
 #SISTEMA FACTURA ASODEC
 

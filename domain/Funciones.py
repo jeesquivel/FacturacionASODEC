@@ -144,12 +144,14 @@ def retornarProducto(inventario, id):
             return producto
     return
 
+# Disminuye la cantidad de productos disponibles en el inventario con base en una factura
 def actualizarInventario(factura,inventario):
     listaProductosFactura=factura.getProductos()
     for i in listaProductosFactura:
         producto=i[0]
         descontarCantidad(producto.getCodigo,inventario,i[1])
 
+# Disminuye la cantidad de un producto dado por su codigo
 def descontarCantidad(codigo,inventario,cantidad):
     for i in inventario:
         if i.getCodigo==codigo:
